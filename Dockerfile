@@ -3,11 +3,11 @@ FROM docker.io/library/ubuntu:focal
 ARG USER_ID USER_NAME GROUP_ID BULD_DATE ANSIBLE_VERSION
 ENV DEBIAN_FRONTEND=noninteractive
 
-LABEL maintainer="rhh.klussmann@gmail.com"
+LABEL maintainer="d@davchev.com"
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.name="ansible-development"
 LABEL org.label-schema.description="Ansible development container"
-LABEL org.label-schema.vcs-url="https://github.com/siw36/ansible-development"
+LABEL org.label-schema.vcs-url="https://github.com/Matka4/ansible-development"
 
 USER 0
 
@@ -15,11 +15,11 @@ WORKDIR /tmp
 
 # Build cache and upgrade OS
 RUN apt update && \
-  apt upgrade -y
+  apt upgrade -yq
 
 # Install repo packages
 RUN apt update && \
-  apt install -y \
+  apt install -yq \
   wget \
   ca-certificates \
   apt-transport-https \
@@ -31,12 +31,15 @@ RUN apt update && \
   python3-pip \
   mysql-client \
   ssh \
-  vim \
+  nano \
   tar \
   gzip \
   openjdk-11-jre-headless \
   git \
   rsync \
+  screen \
+  whois \
+  net-tools \
   iputils-ping
 
 # Use python3.8 as default
